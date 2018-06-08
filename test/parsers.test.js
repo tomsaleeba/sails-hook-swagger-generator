@@ -91,7 +91,7 @@ describe('Parser', function () {
             done();
         });
 
-        describe('should handle the 3 type of route pattern', function () {
+        describe('should handle the different types of route pattern', function () {
             var expected_route = {
                 user: [{
                     http_method: 'post',
@@ -185,6 +185,13 @@ describe('Parser', function () {
                 done();
             });
 
+            it("should handle basic route pattern, 'method path':fn()", function (done) {
+                var expected = {};
+                // FIXME make these get parsed correctly
+                const result = parser.routes({'get /blah': function (req, res) { }});
+                assert.deepEqual(result, expected, 'should not explode for inline route functions');
+                done();
+            });
         });
 
 
