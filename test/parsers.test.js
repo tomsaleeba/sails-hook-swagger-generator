@@ -192,6 +192,15 @@ describe('Parser', function () {
                 assert.deepEqual(result, expected, 'should not explode for inline route functions');
                 done();
             });
+
+            // response names are described at https://sailsjs.com/documentation/concepts/extending-sails/custom-responses
+            it("should handle basic route pattern, 'method path':{response: 'responseName'}", function (done) {
+                var expected = {};
+                // FIXME make these get parsed correctly
+                const result = parser.routes({'get /blah': {response: 'notFound'}});
+                assert.deepEqual(result, expected, 'should not explode for named responses');
+                done();
+            });
         });
 
 
