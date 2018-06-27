@@ -193,6 +193,17 @@ describe('Parser', function () {
                 done();
             });
 
+            it("should handle basic route pattern, 'path': {fn: fn()}", function (done) {
+                var expected = {};
+                // FIXME make these get parsed correctly
+                const result = parser.routes({'/files': {
+                    skipAssets: true,
+                    fn: function (req, res) { },
+                }});
+                assert.deepEqual(result, expected, 'should not explode for inline route functions');
+                done();
+            });
+
             // response names are described at https://sailsjs.com/documentation/concepts/extending-sails/custom-responses
             it("should handle basic route pattern, 'method path':{response: 'responseName'}", function (done) {
                 var expected = {};
