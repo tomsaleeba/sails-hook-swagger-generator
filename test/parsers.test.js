@@ -204,6 +204,28 @@ describe('Parser', function () {
                 done();
             });
 
+            it("should handle basic route pattern, 'method path': {action: 'some/action'}", function (done) {
+                // var expected = {};
+                var expected = {
+                    "": [{
+                        "action": "files/get",
+                        "custom": true,
+                        "description": "",
+                        "http_method": "get",
+                        "keys": [
+                            "id"
+                        ],
+                        "path": "/files",
+                        "query": [],
+                        "summary": "",
+                    }]
+                }
+                // FIXME make these get parsed correctly
+                const result = parser.routes({'get /files/:id': { action: 'files/get' }});
+                assert.deepEqual(result, expected, 'should not explode for action route');
+                done();
+            });
+
             // response names are described at https://sailsjs.com/documentation/concepts/extending-sails/custom-responses
             it("should handle basic route pattern, 'method path':{response: 'responseName'}", function (done) {
                 var expected = {};
